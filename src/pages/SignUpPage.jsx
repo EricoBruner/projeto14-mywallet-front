@@ -26,7 +26,7 @@ export default function SignUpPage() {
         navigate("/");
       })
       .catch((error) => {
-        alert(error);
+        alert(error.response.data);
       });
   }
 
