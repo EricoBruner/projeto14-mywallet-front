@@ -25,7 +25,7 @@ export default function SignInPage() {
         navigate("/home");
       })
       .catch((error) => {
-        alert(error);
+        alert(error.response.data);
       });
   }
 
