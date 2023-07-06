@@ -23,7 +23,7 @@ export default function SignUpPage() {
     axios
       .post(`${serverUrl}/cadastro`, user)
       .then((resp) => {
-        navigate("/home");
+        navigate("/");
       })
       .catch((error) => {
         alert(error);
