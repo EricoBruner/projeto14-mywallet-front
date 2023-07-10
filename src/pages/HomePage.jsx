@@ -2,8 +2,38 @@ import styled from "styled-components";
 import { BiExit } from "react-icons/bi";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function HomePage() {
+  const serverUrl = import.meta.env.VITE_API_SERVER;
+  const [transactions, setTransactions] = useState([]);
+  const [balance, setBalance] = useState(0.0);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    axios
+      .get(`${serverUrl}/nova-transacao`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((resp) => {
+        setTransactions(resp.data);
+        console.log(resp.data);
+        let newBalance = 0;
+        resp.data.forEach((t) => {
+          if (t.type == "entrada") newBalance += t.amount;
+          else newBalance -= t.amount;
+        });
+        setBalance(newBalance);
+      })
+      .catch((error) => {
+        alert(error.response.data);
+      });
+  }, []);
+
   return (
     <HomeContainer>
       <Header>
@@ -13,26 +43,20 @@ export default function HomePage() {
 
       <TransactionsContainer>
         <ul>
-          <ListItemContainer>
-            <div>
-              <span>30/11</span>
-              <strong>Almoço mãe</strong>
-            </div>
-            <Value color={"negativo"}>120,00</Value>
-          </ListItemContainer>
-
-          <ListItemContainer>
-            <div>
-              <span>15/11</span>
-              <strong>Salário</strong>
-            </div>
-            <Value color={"positivo"}>3000,00</Value>
-          </ListItemContainer>
+          {transactions.map((t) => (
+            <ListItemContainer key={t._id}>
+              <div>
+                <span>{t.date}</span>
+                <strong>{t.description}</strong>
+              </div>
+              <Value color={t.type}>{t.amount.toFixed(2)}</Value>
+            </ListItemContainer>
+          ))}
         </ul>
 
         <article>
           <strong>Saldo</strong>
-          <Value color={"positivo"}>2880,00</Value>
+          <Value color={balance >= 0 && "entrada"}>{balance.toFixed(2)}</Value>
         </article>
       </TransactionsContainer>
 
@@ -65,6 +89,7 @@ const HomeContainer = styled.div`
   flex-direction: column;
   height: calc(100vh - 50px);
 `;
+
 const Header = styled.header`
   display: flex;
   align-items: center;
@@ -74,6 +99,7 @@ const Header = styled.header`
   font-size: 26px;
   color: white;
 `;
+
 const TransactionsContainer = styled.article`
   flex-grow: 1;
   background-color: #fff;
@@ -92,14 +118,15 @@ const TransactionsContainer = styled.article`
     }
   }
 `;
+
 const ButtonsContainer = styled.section`
   margin-top: 15px;
   margin-bottom: 0;
   display: flex;
   gap: 15px;
 
-  Link {
-    width: auto;
+  a {
+    width: 100%;
   }
 `;
 
@@ -119,8 +146,9 @@ const Button = styled.button`
 const Value = styled.div`
   font-size: 16px;
   text-align: right;
-  color: ${(props) => (props.color === "positivo" ? "green" : "red")};
+  color: ${(props) => (props.color === "entrada" ? "green" : "red")};
 `;
+
 const ListItemContainer = styled.li`
   display: flex;
   justify-content: space-between;
