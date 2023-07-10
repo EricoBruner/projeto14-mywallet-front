@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 export default function TransactionsPage() {
   const navigate = useNavigate();
-  const serverUrl = import.meta.env.VITE_API_SERVER;
+  const serverUrl = import.meta.env.VITE_API_URL;
   const { tipo } = useParams();
   const [amount, setAmount] = useState();
   const [description, setDescription] = useState();

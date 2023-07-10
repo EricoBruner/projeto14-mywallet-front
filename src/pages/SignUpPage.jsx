@@ -5,7 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function SignUpPage() {
-  const serverUrl = import.meta.env.VITE_API_SERVER;
+  const serverUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
   const [password, setPassword] = useState("");

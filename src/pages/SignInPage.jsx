@@ -6,7 +6,7 @@ import axios from "axios";
 import MyWalletLogo from "../components/MyWalletLogo";
 
 export default function SignInPage() {
-  const serverUrl = import.meta.env.VITE_API_SERVER;
+  const serverUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");

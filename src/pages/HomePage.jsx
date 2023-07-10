@@ -7,7 +7,7 @@ import axios from "axios";
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const serverUrl = import.meta.env.VITE_API_SERVER;
+  const serverUrl = import.meta.env.VITE_API_URL;
   const [transactions, setTransactions] = useState([]);
   const [balance, setBalance] = useState(0.0);
 
