@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { BiExit } from "react-icons/bi";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function HomePage() {
+  const navigate = useNavigate();
   const serverUrl = import.meta.env.VITE_API_SERVER;
   const [transactions, setTransactions] = useState([]);
   const [balance, setBalance] = useState(0.0);
@@ -13,32 +14,41 @@ export default function HomePage() {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    axios
-      .get(`${serverUrl}/nova-transacao`, {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then((resp) => {
-        setTransactions(resp.data);
-        console.log(resp.data);
-        let newBalance = 0;
-        resp.data.forEach((t) => {
-          if (t.type == "entrada") newBalance += t.amount;
-          else newBalance -= t.amount;
+    if (token) {
+      axios
+        .get(`${serverUrl}/nova-transacao`, {
+          headers: {
+            Authorization: token,
+          },
+        })
+        .then((resp) => {
+          setTransactions(resp.data);
+          console.log(resp.data);
+          let newBalance = 0;
+          resp.data.forEach((t) => {
+            if (t.type == "entrada") newBalance += t.amount;
+            else newBalance -= t.amount;
+          });
+          setBalance(newBalance);
+        })
+        .catch((error) => {
+          alert(error.response.data);
         });
-        setBalance(newBalance);
-      })
-      .catch((error) => {
-        alert(error.response.data);
-      });
+    }
   }, []);
+
+  function logout() {
+    localStorage.removeItem("token");
+    navigate("/");
+  }
 
   return (
     <HomeContainer>
       <Header>
         <h1>Olá, Fulano</h1>
-        <BiExit />
+        <ExitButton>
+          <BiExit onClick={() => logout()} />
+        </ExitButton>
       </Header>
 
       <TransactionsContainer>
@@ -56,7 +66,9 @@ export default function HomePage() {
 
         <article>
           <strong>Saldo</strong>
-          <Value color={balance >= 0 && "entrada"}>{balance.toFixed(2)}</Value>
+          <Value color={balance >= 0 ? "entrada" : "saida"}>
+            {balance.toFixed(2)}
+          </Value>
         </article>
       </TransactionsContainer>
 
@@ -98,6 +110,15 @@ const Header = styled.header`
   margin-bottom: 15px;
   font-size: 26px;
   color: white;
+`;
+
+const ExitButton = styled.div`
+  cursor: pointer;
+  display: flex;
+  svg {
+    width: 30px;
+    height: 30px;
+  }
 `;
 
 const TransactionsContainer = styled.article`

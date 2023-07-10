@@ -42,7 +42,7 @@ export default function SignInPage() {
         <input
           placeholder="Senha"
           type="password"
-          autocomplete="new-password"
+          autoComplete="new-password"
           onChange={(e) => setPassword(e.target.value)}
           required
         />
