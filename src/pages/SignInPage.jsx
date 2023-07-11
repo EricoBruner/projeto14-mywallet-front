@@ -20,8 +20,9 @@ export default function SignInPage() {
     axios
       .post(`${serverUrl}/`, user)
       .then((resp) => {
-        const token = "Bearer " + resp.data;
+        const token = "Bearer " + resp.data.token;
         localStorage.setItem("token", token);
+        localStorage.setItem("user", resp.data.user);
         navigate("/home");
       })
       .catch((error) => {

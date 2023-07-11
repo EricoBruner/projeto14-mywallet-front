@@ -10,6 +10,7 @@ export default function HomePage() {
   const serverUrl = import.meta.env.VITE_API_URL;
   const [transactions, setTransactions] = useState([]);
   const [balance, setBalance] = useState(0.0);
+  const user = localStorage.getItem("user");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -23,7 +24,6 @@ export default function HomePage() {
         })
         .then((resp) => {
           setTransactions(resp.data);
-          console.log(resp.data);
           let newBalance = 0;
           resp.data.forEach((t) => {
             if (t.type == "entrada") newBalance += t.amount;
@@ -45,7 +45,7 @@ export default function HomePage() {
   return (
     <HomeContainer>
       <Header>
-        <h1 data-test="user-name">Olá, Fulano</h1>
+        <h1 data-test="user-name">Olá, {user ? user : "Fulano"}!</h1>
         <ExitButton>
           <BiExit data-test="logout" onClick={() => logout()} />
         </ExitButton>
