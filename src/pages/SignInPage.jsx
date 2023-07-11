@@ -16,7 +16,6 @@ export default function SignInPage() {
     e.preventDefault();
 
     const user = { email, password };
-    console.log(serverUrl);
 
     axios
       .post(`${serverUrl}/`, user)
@@ -26,7 +25,8 @@ export default function SignInPage() {
         navigate("/home");
       })
       .catch((error) => {
-        alert(error.response.data);
+        console.log(serverUrl);
+        alert(error.response);
       });
   }
 
