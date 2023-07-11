@@ -35,11 +35,29 @@ export default function HomePage() {
           alert(error.response.data);
         });
     }
-  }, []);
+  }, [deleteTransaction]);
 
   function logout() {
     localStorage.clear();
     navigate("/");
+  }
+
+  function deleteTransaction(id) {
+    const resp = window.confirm("Deseja realmente excluir está transação?");
+    if (!resp) return;
+
+    const token = localStorage.getItem("token");
+
+    axios
+      .delete(`${serverUrl}/nova-transacao/${id}`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((resp) => {})
+      .catch((error) => {
+        alert(error.response.data);
+      });
   }
 
   return (
@@ -59,9 +77,17 @@ export default function HomePage() {
                 <span>{t.date}</span>
                 <strong data-test="registry-name">{t.description}</strong>
               </div>
-              <Value data-test="registry-amount" color={t.type}>
-                {t.amount.toFixed(2)}
-              </Value>
+              <div>
+                <Value data-test="registry-amount" color={t.type}>
+                  {t.amount.toFixed(2)}
+                </Value>
+                <DeleteButton
+                  data-test="logout"
+                  onClick={() => deleteTransaction(t._id)}
+                >
+                  X
+                </DeleteButton>
+              </div>
             </ListItemContainer>
           ))}
         </ul>
@@ -179,11 +205,29 @@ const ListItemContainer = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 9px;
   color: #000000;
-  margin-right: 10px;
+
   div span {
     color: #c6c6c6;
     margin-right: 10px;
   }
+
+  div {
+    display: flex;
+    align-items: center;
+  }
+`;
+
+const DeleteButton = styled.button`
+  width: 9px;
+  height: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  color: #c6c6c6;
+  font-size: 11px;
 `;
