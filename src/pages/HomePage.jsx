@@ -82,7 +82,7 @@ export default function HomePage() {
                   {t.amount.toFixed(2)}
                 </Value>
                 <DeleteButton
-                  data-test="logout"
+                  data-test="registry-delete"
                   onClick={() => deleteTransaction(t._id)}
                 >
                   X
