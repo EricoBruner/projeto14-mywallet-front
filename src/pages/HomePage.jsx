@@ -45,9 +45,9 @@ export default function HomePage() {
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, Fulano</h1>
+        <h1 data-test="user-name">Olá, Fulano</h1>
         <ExitButton>
-          <BiExit onClick={() => logout()} />
+          <BiExit data-test="logout" onClick={() => logout()} />
         </ExitButton>
       </Header>
 
@@ -57,23 +57,28 @@ export default function HomePage() {
             <ListItemContainer key={t._id}>
               <div>
                 <span>{t.date}</span>
-                <strong>{t.description}</strong>
+                <strong data-test="registry-name">{t.description}</strong>
               </div>
-              <Value color={t.type}>{t.amount.toFixed(2)}</Value>
+              <Value data-test="registry-amount" color={t.type}>
+                {t.amount.toFixed(2)}
+              </Value>
             </ListItemContainer>
           ))}
         </ul>
 
         <article>
           <strong>Saldo</strong>
-          <Value color={balance >= 0 ? "entrada" : "saida"}>
+          <Value
+            data-test="total-amount"
+            color={balance >= 0 ? "entrada" : "saida"}
+          >
             {balance.toFixed(2)}
           </Value>
         </article>
       </TransactionsContainer>
 
       <ButtonsContainer>
-        <Link to="/nova-transacao/entrada">
+        <Link data-test="new-income" to="/nova-transacao/entrada">
           <Button>
             <AiOutlinePlusCircle />
             <p>
@@ -82,7 +87,7 @@ export default function HomePage() {
           </Button>
         </Link>
 
-        <Link to="/nova-transacao/saida">
+        <Link data-test="new-expense" to="/nova-transacao/saida">
           <Button>
             <AiOutlineMinusCircle />
             <p>

@@ -36,18 +36,20 @@ export default function TransactionsPage() {
       <h1>Nova {tipo === "entrada" ? "entrada" : "saída"}</h1>
       <form onSubmit={registerNewTransaction}>
         <input
+          data-test="registry-amount-input"
           placeholder="Valor"
           type="text"
           onChange={(e) => setAmount(e.target.value)}
           required
         />
         <input
+          data-test="registry-name-input"
           placeholder="Descrição"
           type="text"
           onChange={(e) => setDescription(e.target.value)}
           required
         />
-        <button type="submit">
+        <button data-test="registry-save" type="submit">
           Salvar {tipo === "entrada" ? "entrada" : "saída"}
         </button>
       </form>
