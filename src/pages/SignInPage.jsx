@@ -16,6 +16,7 @@ export default function SignInPage() {
     e.preventDefault();
 
     const user = { email, password };
+    console.log(serverUrl);
 
     axios
       .post(`${serverUrl}/`, user)
