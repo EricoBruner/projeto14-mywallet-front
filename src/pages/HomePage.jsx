@@ -38,7 +38,7 @@ export default function HomePage() {
   }, []);
 
   function logout() {
-    localStorage.removeItem("token");
+    localStorage.clear();
     navigate("/");
   }
 
