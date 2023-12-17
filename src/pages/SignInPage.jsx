@@ -50,7 +50,7 @@ export default function SignInPage() {
           required
         />
         <button data-test="sign-in-submit" type="submit">
-          Entrar
+          Login
         </button>
       </form>
 
