@@ -49,7 +49,7 @@ export default function HomePage() {
     const token = localStorage.getItem("token");
 
     axios
-      .delete(`${serverUrl}/nova-transacao/${id}`, {
+      .delete(`${serverUrl}/transaction/${id}`, {
         headers: {
           Authorization: token,
         },
