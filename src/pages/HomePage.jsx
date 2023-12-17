@@ -43,7 +43,9 @@ export default function HomePage() {
   }
 
   function deleteTransaction(id) {
-    const resp = window.confirm("Deseja realmente excluir está transação?");
+    const resp = window.confirm(
+      "Do you really want to delete this transaction?"
+    );
     if (!resp) return;
 
     const token = localStorage.getItem("token");
@@ -63,7 +65,7 @@ export default function HomePage() {
   return (
     <HomeContainer>
       <Header>
-        <h1 data-test="user-name">Olá, {user ? user : "Fulano"}!</h1>
+        <h1 data-test="user-name">Olá, {user ? user : "John Doe"}!</h1>
         <ExitButton>
           <BiExit data-test="logout" onClick={() => logout()} />
         </ExitButton>
@@ -94,31 +96,27 @@ export default function HomePage() {
 
         <article>
           <strong>Saldo</strong>
-          <Value
-            data-test="total-amount"
-            color={balance >= 0 ? "entrada" : "saida"}
-          >
+          <Value data-test="total-amount" color={balance >= 0 ? "in" : "out"}>
             {balance.toFixed(2)}
           </Value>
         </article>
       </TransactionsContainer>
 
       <ButtonsContainer>
-        <Link data-test="new-income" to="/nova-transacao/entrada">
+        <Link data-test="new-income" to="/transaction/in">
           <Button>
             <AiOutlinePlusCircle />
             <p>
-              Nova <br /> entrada
+              New <br /> income
             </p>
           </Button>
         </Link>
 
-        <Link data-test="new-expense" to="/nova-transacao/saida">
+        <Link data-test="new-expense" to="/transaction/out">
           <Button>
             <AiOutlineMinusCircle />
             <p>
-              Nova <br />
-              saída
+              New <br /> expense
             </p>
           </Button>
         </Link>
@@ -198,7 +196,7 @@ const Button = styled.button`
 const Value = styled.div`
   font-size: 16px;
   text-align: right;
-  color: ${(props) => (props.color === "entrada" ? "green" : "red")};
+  color: ${(props) => (props.color === "in" ? "green" : "red")};
 `;
 
 const ListItemContainer = styled.li`
