@@ -26,7 +26,7 @@ export default function HomePage() {
           setTransactions(resp.data);
           let newBalance = 0;
           resp.data.forEach((t) => {
-            if (t.type == "entrada") newBalance += t.amount;
+            if (t.type == "in") newBalance += t.amount;
             else newBalance -= t.amount;
           });
           setBalance(newBalance);
