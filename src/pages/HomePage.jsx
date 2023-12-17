@@ -17,7 +17,7 @@ export default function HomePage() {
 
     if (token) {
       axios
-        .get(`${serverUrl}/nova-transacao`, {
+        .get(`${serverUrl}/transaction`, {
           headers: {
             Authorization: token,
           },
