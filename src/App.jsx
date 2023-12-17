@@ -22,9 +22,9 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<SignInPage />} />
-      <Route path="/cadastro" element={<SignUpPage />} />
+      <Route path="/signup" element={<SignUpPage />} />
       <Route path="/home" element={<HomePage />} />
-      <Route path="/nova-transacao/:tipo" element={<TransactionsPage />} />
+      <Route path="/transaction/:type" element={<TransactionsPage />} />
     </Routes>
   );
 }

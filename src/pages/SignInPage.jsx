@@ -43,7 +43,7 @@ export default function SignInPage() {
         />
         <input
           data-test="password"
-          placeholder="Senha"
+          placeholder="Password"
           type="password"
           autoComplete="new-password"
           onChange={(e) => setPassword(e.target.value)}
@@ -54,7 +54,7 @@ export default function SignInPage() {
         </button>
       </form>
 
-      <Link to={"/cadastro"}>Primeira vez? Cadastre-se!</Link>
+      <Link to={"/signup"}>First time? Register!</Link>
     </SingInContainer>
   );
 }
