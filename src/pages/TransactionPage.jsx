@@ -18,7 +18,7 @@ export default function TransactionsPage() {
     const transaction = { amount, description };
 
     axios
-      .post(`${serverUrl}/nova-transacao/${tipo}`, transaction, {
+      .post(`${serverUrl}/transaction/${tipo}`, transaction, {
         headers: {
           Authorization: token,
         },
@@ -33,7 +33,7 @@ export default function TransactionsPage() {
 
   return (
     <TransactionsContainer>
-      <h1>Nova {tipo === "entrada" ? "entrada" : "saída"}</h1>
+      <h1>Nova {tipo === "in" ? "entrada" : "saída"}</h1>
       <form onSubmit={registerNewTransaction}>
         <input
           data-test="registry-amount-input"
@@ -50,7 +50,7 @@ export default function TransactionsPage() {
           required
         />
         <button data-test="registry-save" type="submit">
-          Salvar {tipo === "entrada" ? "entrada" : "saída"}
+          Salvar {tipo === "in" ? "entrada" : "saída"}
         </button>
       </form>
     </TransactionsContainer>
