@@ -16,7 +16,7 @@ export default function SignUpPage() {
   function signUp(e) {
     e.preventDefault();
 
-    if (password != confirmPass) return alert("Senhas não conferem!");
+    if (password != confirmPass) return alert("Passwords don't match!");
 
     const user = { password, name, email };
 
@@ -36,7 +36,7 @@ export default function SignUpPage() {
         <MyWalletLogo />
         <input
           data-test="name"
-          placeholder="Nome"
+          placeholder="Name"
           type="text"
           onChange={(e) => setName(e.target.value)}
           required
@@ -50,7 +50,7 @@ export default function SignUpPage() {
         />
         <input
           data-test="password"
-          placeholder="Senha"
+          placeholder="Password"
           type="password"
           autoComplete="new-password"
           onChange={(e) => setPassword(e.target.value)}
@@ -58,18 +58,18 @@ export default function SignUpPage() {
         />
         <input
           data-test="conf-password"
-          placeholder="Confirme a senha"
+          placeholder="Confirm the password"
           type="password"
           autoComplete="new-password"
           onChange={(e) => setConfirmPass(e.target.value)}
           required
         />
         <button data-test="sign-up-submit" type="submit">
-          Cadastrar
+          Register
         </button>
       </form>
 
-      <Link>Já tem uma conta? Entre agora!</Link>
+      <Link>Already have an account? Get in now!</Link>
     </SingUpContainer>
   );
 }
