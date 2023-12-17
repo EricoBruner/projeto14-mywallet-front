@@ -10,7 +10,7 @@ export default function AppRoutes() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (window.location.pathname === "/cadastro") {
+    if (window.location.pathname === "/signup") {
       return;
     }
 
