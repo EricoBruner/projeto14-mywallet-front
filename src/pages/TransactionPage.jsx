@@ -33,24 +33,24 @@ export default function TransactionsPage() {
 
   return (
     <TransactionsContainer>
-      <h1>Nova {type === "in" ? "entrada" : "saída"}</h1>
+      <h1>New {type === "in" ? "income" : "expense"}</h1>
       <form onSubmit={registerNewTransaction}>
         <input
           data-test="registry-amount-input"
-          placeholder="Valor"
+          placeholder="Amount"
           type="text"
           onChange={(e) => setAmount(e.target.value)}
           required
         />
         <input
           data-test="registry-name-input"
-          placeholder="Descrição"
+          placeholder="Description"
           type="text"
           onChange={(e) => setDescription(e.target.value)}
           required
         />
         <button data-test="registry-save" type="submit">
-          Salvar {type === "in" ? "entrada" : "saída"}
+          Save {type === "in" ? "income" : "expense"}
         </button>
       </form>
     </TransactionsContainer>
