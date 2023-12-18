@@ -57,8 +57,5 @@ Note: You must have Docker installed
 - Now you can upload your created container!
 
   ```bash
-  docker run -d
-  	--name MYFRONT-END
-  	-p 8080:80
-  MYNAMEIMAGE
+  docker run -d --name MYFRONT-END -p 8080:80 MYNAMEIMAGE
   ```
