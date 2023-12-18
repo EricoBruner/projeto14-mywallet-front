@@ -34,3 +34,31 @@ For this project, the following were used:
   ```bash
   npm run dev
   ```
+
+# How to run in Docker environment
+
+Note: You must have Docker installed
+
+- Clone this repository
+- Install all dependencies
+
+  ```bash
+  npm i
+  ```
+
+- Configure the `.env` file using the `.env.example` file (see "Running the application locally or within the docker section" for details), if you wish you can use an API that was developed together with this application (https://mywallet-api-rgbt.onrender.com)
+
+- Using docker commands, build the image
+
+  ```bash
+  docker build -t MYNAMEIMAGE .
+  ```
+
+- Now you can upload your created container!
+
+  ```bash
+  docker run -d
+  	--name MYFRONT-END
+  	-p 8080:80
+  MYNAMEIMAGE
+  ```
