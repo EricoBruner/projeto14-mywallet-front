@@ -59,3 +59,13 @@ Note: You must have Docker installed
   ```bash
   docker run -d --name MYFRONT-END -p 8080:80 MYNAMEIMAGE
   ```
+
+# How to run in Docker environment with provided image
+
+Note: You must have Docker installed
+
+- Just use the command below to download and upload the container!
+
+  ```bash
+  docker run -d -p 8080:80 --name MYFRONT-END ericobruner/mywallet-front
+  ```
